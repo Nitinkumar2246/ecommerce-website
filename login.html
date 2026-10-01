@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyStore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MyStore</div>
+
+    <a href="index.html" class="home-link">
+        🏠 Home
+    </a>
+</header>
+
+<section class="auth-section">
+
+    <div class="auth-box">
+
+        <h1>Login</h1>
+
+        <p>Login to your MyStore account</p>
+
+        <form id="loginForm">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        <p class="auth-bottom">
+            Don't have an account?
+            <a href="register.html">
+                Register
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<script>
+
+document
+    .getElementById("loginForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        const email =
+            document.getElementById("loginEmail").value;
+
+        const password =
+            document.getElementById("loginPassword").value;
+
+        const user =
+            JSON.parse(
+                localStorage.getItem("user")
+            );
+
+        if (!user) {
+
+            alert("Account not found. Please register first.");
+
+            return;
+        }
+
+        if (
+            user.email === email &&
+            user.password === password
+        ) {
+
+            localStorage.setItem(
+                "loggedIn",
+                "true"
+            );
+
+            alert("Login successful!");
+
+            window.location.href = "index.html";
+
+        } else {
+
+            alert("Invalid email or password.");
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
